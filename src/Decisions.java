@@ -180,7 +180,7 @@ String dayName(int h) {
   } else if (h == 4) {
     day = "Wednesday";
   } else if (h == 5) {
-    day = "Thurday";
+    day = "Thursday";
   } else {
     day = "Friday";
   }
@@ -283,6 +283,7 @@ void main() {
   // Check dayName
   Check.is(dayName(3), "Tuesday");
   Check.is(dayName(0), "Saturday");
+  Check.is(dayName(5), "Thursday");
   Check.is(dayName(6), "Friday");
   Check.is(dayName(7), "Error 1: Not an accepted number");
   Check.is(dayName(-1), "Error 1: Not an accepted number");
