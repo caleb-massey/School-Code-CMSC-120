@@ -2,6 +2,8 @@
 enum Day { MON, TUE, WED, THU, FRI, SAT, SUN }
 enum Rating { G, PG, PG13, R, NC17 }
 enum Show { MATINEE, EVENING, LATE }
+record Visit(int age, Rating rating, boolean withAdult) {}
+record Ticket(int age, Show show) {}
 
 // gives back correct pricing according to age
 int ticket(int age){
@@ -51,8 +53,15 @@ boolean isPeak(Day d, Show s){
     return day && evening;
 }
 
+// PART B
+
+// returns true if the person can be admitted
+boolean admitted(Visit v){
+    return allowed(v.rating, v.age, v.withAdult);
+}
 
 void main() {
+    // PART A CHECKS
 
     // Check ticket edge cases given
     Check.is(ticket(3), 0);
@@ -85,6 +94,15 @@ void main() {
     Check.is(isPeak(Day.FRI, Show.MATINEE), false);
     Check.is(isPeak(Day.SAT, Show.EVENING), true);
     Check.is(isPeak(Day.SAT, Show.LATE), false);
+
+    // PART B CHECKS
+    Check.is(admitted(new Visit(16, Rating.R, true)), true);
+    Check.is(admitted(new Visit(18, Rating.NC17, false)), true);
+    Check.is(admitted(new Visit(2, Rating.PG, false)), true);
+    Check.is(admitted(new Visit(16, Rating.NC17, true)), false);
+    Check.is(admitted(new Visit(16, Rating.R, false)), false);
+    
+    
 
     Check.done();
 }
