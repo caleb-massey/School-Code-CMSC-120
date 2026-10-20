@@ -60,6 +60,31 @@ boolean admitted(Visit v){
     return allowed(v.rating, v.age, v.withAdult);
 }
 
+// returns what a ticket costs
+int cost(Ticket t){
+    return price(t.age, t.show);
+}
+
+// returns whether you're a child, adult, or senior; returns it with the show type
+// age checks work like ticket(), child under 12, senior of 65 over, everyone else adult
+String label(Ticket t){
+    String age; 
+    if (t.age < 12){  
+        age = "child";
+    } else if(t.age >= 65){
+        age = "senior";
+    } else{
+        age = "adult";
+    }
+    String show = switch(t.show){
+        case MATINEE -> "matinee";
+        case EVENING -> "evening";
+        case LATE -> "late";
+    };
+    return age + ", " + show;
+}
+
+
 void main() {
     // PART A CHECKS
 
@@ -96,11 +121,25 @@ void main() {
     Check.is(isPeak(Day.SAT, Show.LATE), false);
 
     // PART B CHECKS
+
+    // Check admitted
     Check.is(admitted(new Visit(16, Rating.R, true)), true);
     Check.is(admitted(new Visit(18, Rating.NC17, false)), true);
     Check.is(admitted(new Visit(2, Rating.PG, false)), true);
     Check.is(admitted(new Visit(16, Rating.NC17, true)), false);
     Check.is(admitted(new Visit(16, Rating.R, false)), false);
+
+    // Check cost
+    Check.is(cost(new Ticket(8, Show.MATINEE)), 3);
+    Check.is(cost(new Ticket(30, Show.MATINEE)), 9);
+
+    // Check label
+    Check.is(label(new Ticket(8, Show.MATINEE)), "child, matinee");
+    Check.is(label(new Ticket(11, Show.EVENING)), "child, evening");
+    Check.is(label(new Ticket(65, Show.LATE)), "senior, late");
+    Check.is(label(new Ticket(12, Show.EVENING)), "adult, evening");
+    Check.is(label(new Ticket(64, Show.MATINEE)), "adult, matinee");
+
     
     
 
