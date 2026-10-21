@@ -157,7 +157,7 @@ String match(Round r1, Round r2, Round r3){
 // except when it is divisible by 100,
 // except when it is divisible by 400.
 // returns true if above checks pass
-boolean isLeap(int year) {
+boolean isLeap(int year){
   boolean byFour = year % 4 == 0;
   boolean byHundred = year % 100 == 0;
   boolean byFourHundred = year % 400 == 0;
@@ -165,7 +165,7 @@ boolean isLeap(int year) {
 }
 
 // returns how many days are in month of year, checks for the leap year too
-int daysIn(int month, int year) {
+int daysIn(int month, int year){
     return switch(month){
         case 4, 6, 9, 11 -> 30;
         case 2 -> isLeap(year) ? 29 : 28;
