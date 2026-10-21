@@ -2,6 +2,7 @@ enum Day { MON, TUE, WED, THU, FRI, SAT, SUN }
 enum Rating { G, PG, PG13, R, NC17 }
 enum Show { MATINEE, EVENING, LATE }
 enum Move { ROCK, PAPER, SCISSORS, LIZARD, SPOCK }
+
 record Visit(int age, Rating rating, boolean withAdult) {}
 record Ticket(int age, Show show) {}
 record Round(Move mine, Move theirs) {}
